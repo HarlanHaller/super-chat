@@ -1,5 +1,4 @@
 //msg handling
-{
 function msgHandaler(event) {
     let field = document.getElementById("msg-box");
     if (event["key"] === "Enter" && !event["shiftKey"]) {
@@ -23,20 +22,18 @@ function renderMsg(msg, sender) {
     location.appendChild(textParent);
     location.appendChild(text);
 }
-}
+
 
 //event listeners
-{
 document.addEventListener('DOMContentLoaded', function() {
    setup([
        document.getElementsByClassName("chat-display"),
        getTexts()
    ]);
 }, false);
-}
+
 
 //setup functions
-{
 //at runtime executes functions
 function setup(prams) {
     scrollDown(prams[0]);
@@ -46,19 +43,16 @@ function setup(prams) {
 function scrollDown(div) {
     div.scrollTop = div.scrollHeight;
 }
-}
+
 
 //helper functions
-{
-    function renderAllMsg(msgDir) {
-        for (let i = 0; i<Object.keys(msgDir).length; i++) {
-            renderMsg(msgDir[i][0],msgDir[i][1]);
-        }
+function renderAllMsg(msgDir) {
+    for (let i = 0; i<Object.keys(msgDir).length; i++) {
+        renderMsg(msgDir[i][0],msgDir[i][1]);
     }
 }
 
 //comunications
-{
 function getTexts() {
  return {
     0:["hi","In"],
@@ -78,5 +72,4 @@ function getTexts() {
     14:["go","Out"],
     15:["go","Out"]
     }
-}
 }

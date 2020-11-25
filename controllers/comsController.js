@@ -1,4 +1,3 @@
-
 module.exports = {
     handleText: (req, res) => {
         console.log(req.body.msgBox);

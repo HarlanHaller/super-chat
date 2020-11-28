@@ -21,13 +21,15 @@ function renderMsg(msg, sender) {
 
     location.appendChild(textParent);
     location.appendChild(text);
+
+    scrollDown()
 }
 
 
 //event listeners
 document.addEventListener('DOMContentLoaded', function() {
    setup([
-       document.getElementsByClassName("chat-display"),
+       document.getElementById("chat-display"),
        getTexts()
    ]);
 }, false);
@@ -36,12 +38,12 @@ document.addEventListener('DOMContentLoaded', function() {
 //setup functions
 //at runtime executes functions
 function setup(prams) {
-    scrollDown(prams[0]);
-    renderAllMsg(prams[1])
+    renderAllMsg(prams[1]);
+    scrollDown();
 }
 
-function scrollDown(div) {
-    div.scrollTop = div.scrollHeight;
+function scrollDown() {
+    document.getElementById("chat-display").lastChild.scrollIntoView(false);
 }
 
 

@@ -21,6 +21,9 @@ var comsController = require('./controllers/comsController.js');
 
 app.post('/chat-area/message', comsController.handleText)
 
+encryptHelper = require('./controllers/encryptionController');
+enc = new encryptHelper.encrypter();
+
 var server = app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
 });

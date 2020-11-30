@@ -1,19 +1,19 @@
 //msg handling
 function msgHandaler(event) {
-    let field = document.getElementById("msg-box");
-    if (event["key"] === "Enter" && !event["shiftKey"]) {
-        if (field.value !== "") {
-            field.nextSibling.submit();
-            field.parentElement.reset();
-        }
+  let field = document.getElementById('msg-box');
+  if (event['key'] === 'Enter' && !event['shiftKey']) {
+    if (field.value !== '') {
+        sendMsg(field.value);
+        field.value = '';
     }
+  }
 }
 
 function renderMsg(msg, sender) {
     let location = document.getElementById("chat-display");
 
     let text = document.createElement("p");
-    text.innerText = msg;
+    text.textContent = msg;
     text.setAttribute("class", `text textFrom${sender}`)
 
     let textParent = document.createElement("dir");
@@ -43,7 +43,7 @@ function setup(prams) {
 }
 
 function scrollDown() {
-    document.getElementById("chat-display").lastChild.scrollIntoView(false);
+    document.getElementById("chat-display").lastChild.scrollIntoView(true);
 }
 
 
@@ -53,7 +53,13 @@ function renderAllMsg(msgDir) {
         renderMsg(msgDir[i][0],msgDir[i][1]);
     }
 }
-
+function checkSend() {
+    let msg = document.getElementById('msg-box');
+    if (msg.value !== '') {
+        sendMsg(msg.value);
+        msg.value = '';
+    }
+}
 //comunications
 function getTexts() {
  return {
@@ -74,4 +80,26 @@ function getTexts() {
     14:["go","Out"],
     15:["go","Out"]
     }
+}
+
+
+//Connecting to socket.io
+var socket = io();
+let iSentMsg = false;
+
+//When a message is recieved
+socket.on('message', (message) => {
+  if (!iSentMsg) {
+    renderMsg(message, 'Out');
+  } else {
+    iSentMsg = false;
+  }
+});
+
+//Send a message
+function sendMsg(msg) {
+  console.log(msg);
+  socket.emit('message', msg);
+  renderMsg(msg, 'In');
+  iSentMsg = true;
 }

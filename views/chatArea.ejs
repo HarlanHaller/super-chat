@@ -1,13 +1,14 @@
-<script src='/js/chatArea.js'></script>
 <link rel="stylesheet" href="/css/chatArea.css">
 <div class="padding">
     <div class="chat-container">
         <div class="chat-display" id="chat-display"></div>
-        <div class="chat-textfield">
-            <form action="/chat-area/message" method="POST">
-                <input type="text" class="text"id="msg-box" name="msgBox" onkeydown="msgHandaler(event)"/>
-                <input type="submit" class="submit" value="Send"/>
-            </form>
-        </div>
     </div>
 </div>
+<div class="chat-textfield">
+    <div class='form'>
+        <input type="text" class="text" id="msg-box" name="msgBox" onkeydown="msgHandaler(event)" />
+        <input type="submit" class="submit" value="Send" onclick='checkSend()' />
+    </div>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script src='/js/chatArea.js'></script>

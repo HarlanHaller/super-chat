@@ -16,11 +16,11 @@ function renderMsg(msg, sender) {
     text.textContent = msg;
     text.setAttribute("class", `text textFrom${sender}`)
 
-    let textParent = document.createElement("dir");
+    let textParent = document.createElement("div");
     textParent.setAttribute("class", "text-container");
 
     location.appendChild(textParent);
-    location.appendChild(text);
+    textParent.appendChild(text);
 
     scrollDown()
 }
